@@ -6,13 +6,13 @@ require_once 'app/Models/Posts.php';
 
 use app\Models\Posts;
 
-class PostsControlles {
+class PostsController {
 
 	protected $post;
 
 	public function __construct(){  
 
-		$this->post = new Table();
+		$this->post = new Posts();
 	}
 
 	public function index(){
