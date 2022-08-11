@@ -5,12 +5,19 @@
   font-family: 'Roboto', sans-serif;
 }
 
-.nav-item{
-  color: #5ec1e6;
+.navbar-toggler-icon{
+  color:  #5ec1e6;
 }
+
 
 .card-text{
   font-size: 1.2rem;
   margin: 0;
   color: #5ec1e6;
+}
+
+footer{
+  background-color: #5ec1e6;
+  color: #fff;
+  text-align: center;
 }

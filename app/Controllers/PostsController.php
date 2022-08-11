@@ -19,6 +19,10 @@ class PostsController {
 		return $this->post->index();
 	}
 
+	public function indexbycategory($category_id){
+		return $this->post->indexbycategory($category_id);
+	}
+
 }
 
 ?>
