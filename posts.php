@@ -33,7 +33,7 @@
     <body>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="assets/img/logo.jpeg" alt="" width="200"></a>
+                <a class="navbar-brand" href="index.php"><img src="assets/img/logo.jpeg" alt="" width="200"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"> 
                     <svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -69,7 +69,7 @@
             <div class="row">
                 <div class= "col-10 mx-auto">
                     <div class="card mb-3">
-                        <img src="<?php echo $post_contents['image']; ?>" class="card-img-top" alt="imagen post" width="200" height="">
+                        <img src="<?php echo $post_contents['image']; ?>" class="card-img-top" alt="imagen post" width="" height="400">
                         <div class="card-body ">
                             <p class="card-text-post fst-italic lh-sm"><small class="text-muted"><?php echo $post_contents['category_name']; ?></small></p>
                             <p class="card-text-post fst-italic lh-sm"><small class="text-muted"><?php echo $post_contents['created']; ?></small></p>

@@ -28,3 +28,9 @@ footer{
   margin: 0;
   color: #5ec1e6;
 }
+
+.card-welcome{
+  background-color: #5ec1e6;
+  color: #fff;
+  text-align: center;
+}

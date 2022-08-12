@@ -1,27 +1,20 @@
 <?php
 
-	require_once 'app/Controllers/PostsController.php';
+    require_once 'app/Controllers/PostsController.php';
     require_once 'app/Controllers/CategoriesController.php';
-    require_once 'app/Controllers/WelcomeMessagesController.php';
+    require_once 'app/Controllers/AboutUsController.php';
 
-	use app\Controllers\PostsController;
+    use app\Controllers\PostsController;
     use app\Controllers\CategoriesController;
-    use app\Controllers\WelcomeMessagesController;
+    use app\Controllers\AboutUsController;
 
-	$post = new PostsController();
+    $post = new PostsController();
     $category = new CategoriesController();
-    $welcome_message = new WelcomeMessagesController();
-
-    if(!empty($_GET['category'])){
-        $posts = $post->indexbycategory($_GET['category']);
-    }else{
-        $posts = $post->index();
-    }
+    $about_us = new AboutUsController();
 
     $categories = $category->index();
 
-    $welcome_messages = $welcome_message->index();
-   
+    $about_us_contents = $about_us->index();
 
 ?>
 
@@ -60,7 +53,7 @@
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                             <ul class="dropdown-menu">
                                 <?php foreach($categories as $category): ?>
-                                    <li class="dropdown-item"><a href="index.php?category=<?php echo $category['category_id'] ?>"><?php echo $category['category_name']; ?></a></li>
+                                    <li class="dropdown-item"><a href="index.php?category_id=<?php echo $category['category_id'] ?>"><?php echo $category['category_name']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
@@ -77,45 +70,29 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <h2 class="card-title">Bienvenid@s a PsiBlog</h2>
-                            <p class="card-text">
-                                <?php echo $welcome_messages['welcome_message']; ?>
-                            </p>
-                        </div>
-                 </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <?php foreach($posts as $post): ?>
-                    <div class="col-sm-4 p-3">
-                        <div class="card card-border">
-                            <div class="card">
-                                <img src="<?=$post['image'];?>" class="card-img-top" alt="imagen_artículo">
-                                <div class="#card-body text-center p-2">
-                                    <h5 class="card-title fw-bold mb-3"><?php echo $post['title']; ?></h5>
-                                    <p class="card-text lh-sm"><?php echo $post['category_name']; ?></p>
-                                    <p class="card-text lh-sm  mb-3">Autora  <?php echo $post['username']; ?> <?php echo $post['surname']; ?></p>
-                                    <p class="card-text lh-sm mb-3"> Fecha de publicación: <?php echo $post['created']; ?></p>
-                                    <a href="posts.php?post=<?php echo $post['id']; ?>" class="btn btn-primary">Leer +</a>
-                                </div>
-                            </div>
-                        </div>    
+                <?php foreach($about_us_contents as $about_us_content): ?>
+                    <div class="card-header">
+                        <h2><?php echo $about_us_content['user_name']; ?> <?php echo $about_us_content['surname']; ?></h2>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $about_us_content['profession']; ?></h5>
+                        <p class="card-text"><?php echo $about_us_content['presentation']; ?></p>
+                        <a href="mailto:4cines@gmail.com" class="btn btn-primary">Enviar mail</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
+
+
         <div class="container">
             <div class="row"> 
                 <div class="col-12">
-                    <footer class="p-3">
+                    <footer class="mb-5">
                         <p>Psicólogas-online</p>
                         <!-- icono twitwer -->
-                        <div class="p-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="25" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
                                 <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 
                                 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 
@@ -132,8 +109,7 @@
                                 .048-.519.119-1.023.22-1.402a2.007 2.007 0 0 
                                 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17 -.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157
                                 -2.408L6.4 5.209z" />
-                            </svg>
-                        </div>
+                        </svg>
                     </footer>
                 </div>
             </div>
