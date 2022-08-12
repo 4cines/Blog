@@ -23,6 +23,10 @@ class PostsController {
 		return $this->post->indexbycategory($category_id);
 	}
 
+	public function getcontent($post_id){
+		return $this->post->getcontent($post_id);
+	}
+
 }
 
 ?>

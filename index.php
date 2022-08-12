@@ -9,9 +9,14 @@
 	$post = new PostsController();
     $category = new CategoriesController();
 
-	
+    if(!empty($_GET['category'])){
+        $posts = $post->indexbycategory($_GET['category']);
+    }else{
+        $posts = $post->index();
+    }
+
     $categories = $category->index();
-    $posts = $post->index();
+   
 
 ?>
 
@@ -42,43 +47,41 @@
                 </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categorias
-                    </a>
-                    <ul class="dropdown-menu">
-                        <?php foreach($categories as $category): ?>
-                            <li class="dropdown-item"><a href="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></a></li>
-                        <?php endforeach; ?>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.php">Inicio</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+                            <ul class="dropdown-menu">
+                                <?php foreach($categories as $category): ?>
+                                    <li class="dropdown-item"><a href="index.php?category=<?php echo $category['category_id'] ?>"><?php echo $category['category_name']; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sobre nosotras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Admin for partners</a>
+                        </li>
                     </ul>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre nosotras</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Admin for partners</a>
-                    </li>
-                </ul>
                 </div>
             </div>
         </nav>
         <div class="container">
             <div class="row">
                 <?php foreach($posts as $post): ?>
-                    <div class="col-sm w-100">
-                        <div class="card w-100 card-border mb-5">
+                    <div class="col-sm-4">
+                        <div class="card card-border">
                             <div class="card">
                                 <img src="<?=$post['image'];?>" class="card-img-top" alt="imagen_artículo">
                                 <div class="#card-body text-center pb-5 pt-5">
-                                    <h5 class="card-title"><?php echo $post['title']; ?></h5>
+                                    <h5 class="card-title fw-bold"><?php echo $post['title']; ?></h5>
                                     <p class="card-text"> Publicado el: <?php echo $post['created']; ?></p>
                                     <p class="card-text">Author: <?php echo $post['username']; ?></p>
-                                    <p class="card-text"><?php echo $post['categoryname']; ?></p>
-                                    <a href="#" class="btn btn-primary">Leer</a>
+                                    <p class="card-text"><?php echo $post['category_name']; ?></p>
+                                    <a href="posts.php?post=<?php echo $post['id']; ?>" class="btn btn-primary">Leer</a>
                                 </div>
                             </div>
                         </div>    
