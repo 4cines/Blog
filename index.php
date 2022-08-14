@@ -76,8 +76,8 @@
 
     <body>
         <div class="container">
-            <div class="row">
-                <div class=" col col-12">
+            <div class="row p-lg-5">
+                <div class="col-12 shadow p-3 mb-5 bg-body rounded">
                     <div class="card border-white width-50">
                         <div class="card-body">
                             <h2 class="card-title text-center" >Bienvenid@s a PsiBlog</h2>
@@ -85,10 +85,12 @@
                                 <?php echo $welcome_messages['welcome_message']; ?>
                             </p>
                         </div>
-                     </div>
-                 </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-lg-5">
                 <?php foreach($posts as $post): ?>
-                    <div class="col-sm-4 p-3">
+                    <div class="col-sm-4 p-lg-3">
                         <div class="card card-border">
                             <div class="card">
                                 <img src="<?=$post['image'];?>" class="card-img-top" alt="imagen_artículo">

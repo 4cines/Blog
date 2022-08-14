@@ -71,16 +71,21 @@
             <div class="container">
                 <div class="row">
                     <?php foreach($about_us_contents as $about_us_content): ?>
-                        <div class="card-header">
-                            <h2><?php echo $about_us_content['user_name']; ?> <?php echo $about_us_content['surname']; ?></h2>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $about_us_content['profession']; ?></h5>
-                            <p class="card-text"><?php echo $about_us_content['presentation']; ?></p>
-                            <a href="mailto:4cines@gmail.com" class="btn btn-primary">Enviar mail</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            2 days ago
+                        <div class="aboutus col-12 shadow p-4 mb-5">
+                            <div class="card-header bg-white mb-2">
+                                <div class="card-image" style="float:left"> 
+                                    <img src="<?php echo $about_us_content['image_user']; ?>" alt="imagen" width="100">
+                                </div>
+                                <div class="text mb-2">
+                                    <h2 class="mb-5"><?php echo $about_us_content['user_name']; ?> <?php echo $about_us_content['surname']; ?></h2>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $about_us_content['profession']; ?></h5>
+                                <p class="card-text"><?php echo $about_us_content['studies']; ?></p>
+                                <p class="card-text mb-3"><?php echo $about_us_content['presentation']; ?></p>
+                                <a href="mailto:4cines@gmail.com" class="btn btn-primary">Enviar mail</a>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
