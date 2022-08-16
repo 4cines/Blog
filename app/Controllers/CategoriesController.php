@@ -19,6 +19,10 @@ class CategoriesController {
 		return $this->category->index();
 	}
 
+	public function getCategoryName($category){
+		return $this->category->getCategoryName($category);
+	}
+
 }
 
 ?>

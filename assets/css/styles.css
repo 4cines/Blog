@@ -7,7 +7,7 @@
 }
 
 .navbar-toggler-icon{
-  color:  #5ec1e6;
+  color:  #9bcfe2;
 }
 
 
@@ -37,4 +37,10 @@ footer{
 
 .aboutus{
   padding: auto;
+}
+
+.know{
+  color: #5ec1e6;
+  padding: 5px;
+  text-align: center;
 }

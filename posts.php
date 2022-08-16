@@ -2,16 +2,21 @@
 
     require_once 'app/Controllers/PostsController.php';
     require_once 'app/Controllers/CategoriesController.php';
+    require_once 'app/Controllers/CommentsController.php';
 
     use app\Controllers\PostsController;
     use app\Controllers\CategoriesController;
+    use app\Controllers\CommentsController;
 
     $post = new PostsController();
     $category = new CategoriesController();
+    $comment = new CommentsController();
 
     $categories = $category->index();
 
     $post_contents = $post->getcontent($_GET['post']);   
+
+    $post_comments = $comment->getcommentsbypost($_GET['post']);
 
 ?>
 
@@ -68,19 +73,70 @@
         <div class="container">
             <div class="row">
                 <div class= "col-10 mx-auto">
-                    <div class="card mb-3 pb-3">
-                        <img src="<?php echo $post_contents['image']; ?>" class="card-img-top" alt="imagen post" width="" height="400">
-                        <div class="card-body ">
-                            <p class="card-text-post fst-italic lh-sm"><small class="text-muted"><?php echo $post_contents['category_name']; ?></small></p>
-                            <p class="card-text-post fst-italic lh-sm"><small class="text-muted"><?php echo $post_contents['created']; ?></small></p>
-                            <p class="card-text-post fst-italic lh-sm mb-5"><small class="text-muted">Autora: <?php echo $post_contents['username']; ?> <?php echo $post_contents['surname']; ?></small></p>
-                            <h2 class="card-title fw-bold text-center mb-4"><?php echo $post_contents['title']; ?></h2>
-                            <p class="card-content text-center"><?php echo $post_contents['content']; ?></p>
+                    <section>
+                        <div class="card mb-3 pb-3">
+                            <img src="<?php echo $post_contents['image']; ?>" class="card-img-top" alt="imagen post" width="" height="500">
+                            <div>                            
+                                <p class="card-text-post fst-italic lh-sm"><small class="text-muted"> <?php echo $post_contents['category_name']; ?>   <?php echo $post_contents['created']; ?></small></p>
+                                <p class="card-text-post fst-italic lh-sm"><small class="text-muted"> Escrito por <?php echo $post_contents['username']; ?> <?php echo $post_contents['surname']; ?></small></p>
+                            </div>
+
+                            <div class="card-body ">
+                                <h2 class="card-title fw-bold text-center mb-4"><?php echo $post_contents['title']; ?></h2>
+                                <p class="card-content text-center"><?php echo $post_contents['content']; ?></p>
+                            </div>
+                        </div>  
+                    </section>
+                </div>
+            </div>
+            <div class="row">   
+                <!--- empieza seccion de comentarios--->
+                <div class="col-10 m-auto">
+                    <div class="card">
+                        <div class="card-title border p-2">
+                            <h5> Comentarios</h5>
                         </div>
-                    </div>    
+                        <?php foreach ($post_comments as $comment): ?>
+                            <div class="card-body border-bottom">
+                                <h5 class="card-title"><?php echo $comment['name']; ?></h5>
+                                <small> <?php echo $comment['created']; ?></small>
+                                <p class="card-text"><?php echo $comment['comment']; ?></p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div> 
+            </div>
+                    
+<!-- Formulario de comentarios -->
+            <div class="row p-3">
+                <div class="col-10 border m-auto">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>¡Dejanos tus comentarios!</h5>
+                            <form class="admin-form" data-route="addComment"> 
+                         <!-- empieza el formulario, data, cuando se envia saber donde gestionar el formulario -> web.php-->
+                        <input type="hidden" name="id" value=""> <!-- hidden es valor escondido, si quiero crear value="", si quiero editar: value "..."--> 
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tu nombre</label>
+                            <input type="name" class="form-control" name="name" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="name" class="form-control" name="email" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comentario</label>
+                            <textarea type="text" class="form-control" name="comment" value=""> </textarea>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="add-comments btn btn-success" data-post="<?php echo $_GET['post'];?>" data-bs-dismiss="modal">Comenta</button>
+                        </div>
+                    </form>
+                    </div>
                 </div>
             </div>
         </div>
+    </body>
 
         <footer>
             <div class="col-12 w-100 p-3">
@@ -109,5 +165,4 @@
 
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script type="module" src="dist/main.js"></script>
-    </body>
 </html>

@@ -20,6 +20,10 @@
 
     $categories = $category->index();
 
+    if(!empty($_GET['category'])){
+     $category_name = $category->getCategoryName($_GET['category']);
+    }
+
     $welcome_messages = $welcome_message->index();
    
 
@@ -41,7 +45,7 @@
     </head>
 
         <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
+            <div class="container-fluid border-bottom">
                 <a class="navbar-brand" href="index.php"><img src="assets/img/logo.jpeg" alt="" width="200"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"> 
@@ -66,43 +70,60 @@
                         <li class="nav-item">
                             <a class="nav-link" href="aboutus.php">Sobre nosotras</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Admin for partners</a>
-                        </li>
+                        <div class="col" style="float:right">
+                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">Admin</button>
+                        </div>
+                    </div>
                     </ul>
                 </div>
             </div>
         </nav>
-
     <body>
         <div class="container">
             <div class="row p-lg-5">
-                <div class="col-12 shadow p-3 mb-5 bg-body rounded">
-                    <div class="card border-white width-50">
-                        <div class="card-body">
-                            <h2 class="card-title text-center" >Bienvenid@s a PsiBlog</h2>
-                            <p class="card-text">
-                                <?php echo $welcome_messages['welcome_message']; ?>
-                            </p>
+                <div class="col-12 shadow p-3 mb-4 bg-body rounded">
+                    <section>
+                        <div class="card border-white width-50">
+                            <div class="card-body">
+                                <h2 class="card-title text-center" >Bienvenid@s a nuestro blog</h2>
+                                <p class="card-text">
+                                    <?php echo $welcome_messages['welcome_message']; ?>
+                                </p>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
+            </div>
+
+            <div class="row">
+                <section>
+                    <div class="col-12 know">
+                        <h2>Conoce nuestros posts más recientes</h2> 
+                    </div>
+                    <div class= "know">
+                        <h3><?php if(!empty($_GET['category'])){
+                        echo "..sobre  ".$category_name['category_name'];
+                        } ?> </h3>
+                    </div>
+                <section>
             </div>
             <div class="row p-lg-5">
                 <?php foreach($posts as $post): ?>
-                    <div class="col-sm-4 p-lg-3">
-                        <div class="card card-border">
-                            <div class="card">
-                                <img src="<?=$post['image'];?>" class="card-img-top" alt="imagen_artículo">
-                                <div class="#card-body text-center p-2">
-                                    <h5 class="card-title fw-bold mb-3"><?php echo $post['title']; ?></h5>
-                                    <p class="card-text lh-sm"><?php echo $post['category_name']; ?></p>
-                                    <p class="card-text lh-sm  mb-3">Autora  <?php echo $post['username']; ?> <?php echo $post['surname']; ?></p>
-                                    <p class="card-text lh-sm mb-3"> Fecha de publicación: <?php echo $post['created']; ?></p>
-                                    <a href="posts.php?post=<?php echo $post['id']; ?>" class="btn btn-primary">Leer +</a>
+                    <div class="col-sm-4">
+                        <section>
+                            <div class="card card-border">
+                                <div class="card">
+                                    <img src="<?=$post['image'];?>" class="card-img-top" alt="imagen_artículo">
+                                    <div class="#card-body text-center p-2">
+                                        <h5 class="card-title fw-bold mb-3"><?php echo $post['title']; ?></h5>
+                                        <p class="card-text lh-sm"><?php echo $post['category_name']; ?></p>
+                                        <p class="card-text lh-sm  mb-3">Autora  <?php echo $post['username']; ?> <?php echo $post['surname']; ?></p>
+                                        <p class="card-text lh-sm mb-3"> Fecha de publicación: <?php echo $post['created']; ?></p>
+                                        <a href="posts.php?post=<?php echo $post['id']; ?>" class="btn btn-primary">Leer +</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>    
+                            </div>  
+                        <section>  
                     </div>
                 <?php endforeach; ?>
             </div>
